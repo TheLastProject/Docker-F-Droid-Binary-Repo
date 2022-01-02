@@ -24,7 +24,7 @@ fi
 sed -i 's;.*repo_url:.*;repo_url: '"${FDROID_REPO_URL}"';g' /var/www/fdroid/config.yml || exit 1
 sed -i 's;.*repo_name:.*;repo_name: '"${FDROID_REPO_NAME}"';g' /var/www/fdroid/config.yml || exit 1
 
-/app/fdroidserver/fdroid update -c --rename-apks || exit
+/app/fdroidserver/fdroid update -c --rename-apks --use-date-from-apk || exit
 
 nginx
 
@@ -38,6 +38,6 @@ echo
 while true; do
     sleep 60m
     echo "Generating skeleton metadata for all new APKs"
-    /app/fdroidserver/fdroid update -c --rename-apks || exit
+    /app/fdroidserver/fdroid update -c --rename-apks --use-date-from-apk || exit
     echo "Done, next scan for new APKs in 60 minutes"
 done
