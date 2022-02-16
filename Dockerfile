@@ -25,9 +25,6 @@ RUN rm /etc/nginx/sites-enabled/default
 WORKDIR /app
 RUN git clone https://gitlab.com/fdroid/fdroidserver.git
 
-ADD patches /tmp/patches
-RUN patch /app/fdroidserver/fdroidserver/update.py /tmp/patches/1067.diff
-
 COPY . /
 
 CMD ["/entrypoint.sh"]
