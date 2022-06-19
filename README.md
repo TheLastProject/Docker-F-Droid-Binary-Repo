@@ -8,7 +8,7 @@ This is only useful if you want to publish APK files in an F-Droid repo, not whe
 This project needs the following configuration:
 
 ### Environment variables
-- `FDROID_REPO_URL`: The URL your repo will be available on
+- `FDROID_REPO_URL`: The URL your repo will be available on (must end on /repo)
 - `FDROID_REPO_NAME`: A name for your repo
 
 ### Volume
@@ -23,7 +23,7 @@ Just throw APK files in /var/www/fdroid/repo, magic will happen once an hour or 
 ## Example setup
 ```
 docker run -d \
--e FDROID_REPO_URL=https://myfdroidrepo.example.com/ \
+-e FDROID_REPO_URL=https://myfdroidrepo.example.com/fdroid/repo \
 -v your_volume:/var/www/fdroid \
 -p 80:80 \
 --name my-fdroid-binrepo ghcr.io/thelastproject/docker-f-droid-binary-repo:main

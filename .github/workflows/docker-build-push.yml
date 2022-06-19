@@ -3,8 +3,6 @@ name: docker-build-push
 
 on:
   push:
-    branches:
-      - 'main'
   schedule:
     - cron: '8 8 * * 6'
 

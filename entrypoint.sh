@@ -24,9 +24,9 @@ fi
 sed -i 's;.*repo_url:.*;repo_url: '"${FDROID_REPO_URL}"';g' /var/www/fdroid/config.yml || exit 1
 sed -i 's;.*repo_name:.*;repo_name: '"${FDROID_REPO_NAME}"';g' /var/www/fdroid/config.yml || exit 1
 
-/app/fdroidserver/fdroid update -c --rename-apks --use-date-from-apk || exit
-
 nginx
+
+/app/fdroidserver/fdroid update -c --rename-apks --use-date-from-apk || exit
 
 echo
 echo "================================================================"
