@@ -21,6 +21,10 @@ if [ -z "${FDROID_REPO_NAME}" ]; then
     exit 1
 fi
 
+if [ -z "${FDROID_SCAN_INTERVAL}" ]; then
+    FDROID_SCAN_INTERVAL="24h"
+fi
+
 sed -i 's;.*repo_url:.*;repo_url: '"${FDROID_REPO_URL}"';g' /var/www/fdroid/config.yml || exit 1
 sed -i 's;.*repo_name:.*;repo_name: '"${FDROID_REPO_NAME}"';g' /var/www/fdroid/config.yml || exit 1
 
@@ -29,15 +33,15 @@ nginx
 /app/fdroidserver/fdroid update -c --rename-apks --use-date-from-apk || exit
 
 echo
-echo "================================================================"
+echo "==================================================================================="
 echo "To add apps, throw .apk files in /var/www/fdroid/repo."
-echo "This directory is scanned once per hour or on container restart."
-echo "================================================================"
+echo "This directory is scanned once per ${FDROID_SCAN_INTERVAL} or on container restart."
+echo "==================================================================================="
 echo
 
 while true; do
-    sleep 60m
+    sleep "${FDROID_SCAN_INTERVAL}"
     echo "Generating skeleton metadata for all new APKs"
     /app/fdroidserver/fdroid update -c --rename-apks --use-date-from-apk || exit
-    echo "Done, next scan for new APKs in 60 minutes"
+    echo "Done, next scan for new APKs in ${FDROID_SCAN_INTERVAL}"
 done

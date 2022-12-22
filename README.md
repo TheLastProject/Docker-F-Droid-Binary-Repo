@@ -10,6 +10,7 @@ This project needs the following configuration:
 ### Environment variables
 - `FDROID_REPO_URL`: The URL your repo will be available on (must end on /repo)
 - `FDROID_REPO_NAME`: A name for your repo
+- `FDROID_SCAN_INTERVAL`: How long to wait between each scan for APK files (syntax of the `sleep` command, defaults to `24h`)
 
 ### Volume
 You will need to bind a Docker volume to /var/www/fdroid
@@ -18,7 +19,7 @@ You will need to bind a Docker volume to /var/www/fdroid
 The repo will be exposed on port 80
 
 ### Apps
-Just throw APK files in /var/www/fdroid/repo, magic will happen once an hour or when you restart the container.
+Just throw APK files in /var/www/fdroid/repo, magic will happen once every `${FDROID_SCAN_INTERVAL}` or when you restart the container.
 
 ## Example setup
 ```
